@@ -8,31 +8,23 @@
 #include <sys/socket.h>
 #include "db.h"
 #include "user.h"
-#define PORTNUM 2300
- 
-int main(int argc, char *argv[])
-{
-    char* msg = "Connected";
+#define PORTNUM 2300 
+int main(int argc, char *argv[]) {
+	char* msg = "Connected";
 	MYSQL_ROW row;
 	char id[10];
-    struct sockaddr_in dest; /* socket info about the machine connecting to us */
-    struct sockaddr_in serv; /* socket info about our server */
-    int mysocket;            /* socket used to listen for incoming connections */
-    socklen_t socksize = sizeof(struct sockaddr_in);
-
-    memset(&serv, 0, sizeof(serv));           /* zero the struct before filling the fields */
-    serv.sin_family = AF_INET;                /* set the type of connection to TCP/IP */
-    serv.sin_addr.s_addr = htonl(INADDR_ANY); /* set our address to any interface */
-    serv.sin_port = htons(PORTNUM);           /* set the server port number */    
-
-    mysocket = socket(AF_INET, SOCK_STREAM, 0);
-  
-    /* bind serv information to mysocket */
-    bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
-
-    /* start listening, allowing a queue of up to 1 pending connection */
-    listen(mysocket, 1);
-    int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
+	struct sockaddr_in dest; 	
+	struct sockaddr_in serv;
+	int mysocket;           
+	socklen_t socksize = sizeof(struct sockaddr_in);
+	memset(&serv, 0, sizeof(serv));  
+	serv.sin_family = AF_INET;       
+	serv.sin_addr.s_addr = htonl(INADDR_ANY); 
+	serv.sin_port = htons(PORTNUM);              
+	mysocket = socket(AF_INET, SOCK_STREAM, 0);
+	bind(mysocket, (struct sockaddr *)&serv, sizeof(struct sockaddr));
+	listen(mysocket, 1);
+	int consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
 	int len;
 	static char idp[3];
 	while(consocket){
@@ -42,7 +34,8 @@ int main(int argc, char *argv[])
 		init(&a);
 		selectdb(&a);
 		printf("%d", len);
-		char query[] ="select * from users where id=";        			len = recv(consocket, temp, 10, 0);
+		char query[] ="select * from users where id=";  
+		len = recv(consocket, temp, 10, 0);
 		char temp1[4];
 		int i = 0;
 		while(i < 3) {
@@ -72,8 +65,7 @@ int main(int argc, char *argv[])
 		mysql_close(a.con);
 		consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);			
 	}	
-
-    close(mysocket);
-    return EXIT_SUCCESS;
+	close(mysocket);
+	return EXIT_SUCCESS;
 }
 
