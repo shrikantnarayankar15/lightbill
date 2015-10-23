@@ -11,6 +11,7 @@
 #define PORTNUM 2300 
 void displayInfo(userobj a);
 int main(int argc, char *argv[]) {
+	system("clear");
 	char buffer[MAXRCVLEN + 1];
 	int len, mysocket;
 	struct sockaddr_in dest; 
@@ -21,12 +22,15 @@ int main(int argc, char *argv[]) {
 	dest.sin_port = htons(PORTNUM);                 
 	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
 	char msg[3];
+	printf("\t\t\t--------Welcome to LightBill Pay App-------\t\t");
+	printf("\n\n\n");
+	printf("\t\t\tEnter ID:");	
 	scanf("%s", msg);
 	userobj a;
 	system("clear");
 	send(mysocket, msg, strlen(msg), 0); 
 	len = recv(mysocket, &a, sizeof(a), 0);
-	display(a);
+	displayInfo(a);
 	char y;
 	scanf(" %c", &y);
 	if(y == 'y'){
