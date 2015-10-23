@@ -1,4 +1,5 @@
-# lightbill
+# lightbill 
+Client and Server Payment Application
 
 ---You'll require mysql-server and libraries for c 'to interact with mysql 'for that download using following command
 	$sudo apt-get install mysql-server
