@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "user.h"
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -9,7 +10,7 @@
 #include <sys/socket.h>
 #define MAXRCVLEN 500
 #define PORTNUM 2300 
-void displayInfo(userobj a);
+char displayInfo(userobj a);
 int main(int argc, char *argv[]) {
 	system("clear");
 	char buffer[MAXRCVLEN + 1];
@@ -30,24 +31,40 @@ int main(int argc, char *argv[]) {
 	system("clear");
 	send(mysocket, msg, strlen(msg), 0); 
 	len = recv(mysocket, &a, sizeof(a), 0);
-	displayInfo(a);
-	char y;
-	scanf(" %c", &y);
+	char y = displayInfo(a);
 	if(y == 'y'){
-			send(mysocket, "hehe", 4, 0); 
-			printf("%c", y);
-	}		
+		int atmno;
+		send(mysocket, "hehe", 4, 0);
+		printf("\n"); 
+		printf("\t\t\tEnter your ATM no:");
+		scanf("%d", &atmno);
+		printf("\n");
+		printf("\t\t\tEnter pin        :");
+		char *c = getpass("");
+		printf("\n\n");
+		printf("\t\t\tPaid successfulyy");
+	}
+	printf("\n");
 	close(mysocket);
-   return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
-void displayInfo(userobj a) {
-	printf("----------------------------------------------------\n");
+
+char displayInfo(userobj a) {
+	char y;
+	time_t now;
+	time(&now);
+	printf("Date:  %s", ctime(&now));
+	printf("\n\n");
+	printf("\t\t----------------------------------------------------\n");
+	printf("\t\t----------------------------------------------------\n");
 	printf("\t\t\tID       \t:\t\t%d\n", a.id);
 	printf("\t\t\tName     \t:\t\t%s\n", a.name);
 	printf("\t\t\tbill     \t:\t\t%f\n", a.bill);
 	printf("\t\t\tunits    \t:\t\t%d\n", a.unit);
 	printf("\t\t\tcur_unit \t:\t\t%d\n", a.cur_unit);
 	printf("\t\t\tprev_unit\t:\t\t%d\n", a.prev_unit);
-	printf("----------------------------------------------------\n\n\n\n");
+	printf("\t\t----------------------------------------------------\n\n\n\n");
 	printf("\t\t\tDo You want To pay Bill : 'y' Or 'n'");
+	scanf(" %c", &y);
+	return y;
 }

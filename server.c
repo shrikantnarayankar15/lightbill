@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 		send(consocket, &a1, sizeof(a1), 0);
 	 	len = recv(consocket, &temp, 4, 0);
 		if(len){
-			char querypaid[] = "update paidusers set paid = 'n' where id = ";
+			char querypaid[] = "update paidusers set paid = 'y' where id = ";
 			strcat(querypaid, idp);
 			mysql_query(a.con, querypaid);
 		}
