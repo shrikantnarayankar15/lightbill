@@ -1,5 +1,5 @@
 # lightbill Remote payment system
----it will import the data.sql in your newly created database
+requires gtk+- 2.0
 1. download all the files
 2. run following command 
 	$make all
