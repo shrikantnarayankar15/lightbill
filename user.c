@@ -1,7 +1,6 @@
 #include "user.h"
 #include "lightbill.h"
 #include <stdio.h>
-#include <gtk/gtk.h>
 #include <stdlib.h>
 void adduser() {
 	FILE *fp;
