@@ -11,5 +11,4 @@ void remove_user(int id);
 int verifyid(int id);
 user finduser(int id);
 void showusers();
-void gui(int count, int cols, user obj[], int argc, char *argv[]);
-
+void display_user(user a);

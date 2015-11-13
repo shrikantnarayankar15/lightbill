@@ -141,7 +141,7 @@ io:	while(fread(&list, sizeof(list), 1, fp) == 1) {
 void show_bill() {
 	FILE *fp;
 	fp = fopen("lightdata.txt","r");
-	printf(" ID\t|	current_unit\t| prev_unit\t|prev_bill \t |\tcurr_bill \t|\t END_DATE\t|\t paid\t\n");
+	printf("      ID\t| current_unit | prev_unit |   prev_bill   |\tcurr_bill\t|\tEND_DATE\t|\t paid\t\n");
 	int count = 0;
 	lightbill ar[100];
 	lightbill list;	
@@ -161,6 +161,24 @@ void show_bill() {
 		}
 	}
 	for(i = 0; i < count; i++)
-        	printf("\n|%d| %d| %d\t| %f| %f| %s |%s | %c\n ",ar[i].id,ar[i].prev_unit,ar[i].curr_unit ,ar[i].prev_bill, ar[i].curr_bill, ar[i].end_date, ar[i].month,ar[i].paid_y_n);
+        	printf("\n|     %d     |     %d     |     %d     |     %f     |     %f     |     %s     |     %s     |     %c     \n ",ar[i].id,ar[i].prev_unit,ar[i].curr_unit ,ar[i].prev_bill, ar[i].curr_bill, ar[i].end_date, ar[i].month,ar[i].paid_y_n);
 	fclose(fp);
 }
+void display_lightbill(lightbill a) {
+	printf("\n\n");
+	printf("\t\t----------------------------------------------------\n");
+	printf("\t\t----------------------------------------------------\n");
+	printf("\t\t\tID       \t:\t\t%d\n", a.id);
+	printf("\t\t\tcurr_unit     \t:\t\t%d\n", a.curr_unit);
+	printf("\t\t\tprev_unit   \t:\t\t%d\n", a.prev_unit);
+	printf("\t\t\tcurr_bill \t:\t\t%f\n", a.curr_bill);
+	printf("\t\t\tprev_bill   \t:\t\t%f\n", a.prev_bill);
+	printf("\t\t\tmonth       \t:\t\t%s\n", a.month);
+	printf("\t\t\tEND_Date \t:\t\t%s\n", a.end_date);
+	printf("\t\t----------------------------------------------------\n\n\n\n");
+}
+void show_bill_paid() {
+}
+void show_bill_not_paid() {
+}
+

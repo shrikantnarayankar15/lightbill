@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "lightbill.h"
 #include "user.h"
+#include "client.h"
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,20 +12,19 @@
 #include <sys/socket.h>
 #define MAXRCVLEN 500
 #define PORTNUM 2300 
-typedef struct allinfo {
-	user a;
-	lightbill b;
-}allinfo;
-char displayInfo(allinfo a);
 int main(int argc, char *argv[]) {
 	system("clear");
 	char buffer[MAXRCVLEN + 1];
 	int len, mysocket;
 	struct sockaddr_in dest; 
 	mysocket = socket(AF_INET, SOCK_STREAM, 0);
+	if(argv[1] == NULL) {
+		printf("Enter Correct IP:");
+		return;
+	}
 	memset(&dest, 0, sizeof(dest));                
 	dest.sin_family = AF_INET;
-	dest.sin_addr.s_addr = htonl(INADDR_LOOPBACK);  
+	dest.sin_addr.s_addr = inet_addr(argv[1]);
 	dest.sin_port = htons(PORTNUM);                 
 	connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
 	char msg[3];
@@ -38,14 +38,22 @@ int main(int argc, char *argv[]) {
 	len = recv(mysocket, &a, sizeof(a), 0);
 	char y = displayInfo(a);
 	if(y == 'y'){
-		int atmno;
+		char atmno[16];
 		send(mysocket, "hehe", 4, 0);
 		printf("\n"); 
-		printf("\t\t\tEnter your ATM no:");
-		scanf("%d", &atmno);
+		printf("\t\t\tEnter your 14 no ATM:");
+		scanf("%s", atmno);
+		if(strlen(atmno) != 14) {
+			printf("Enter Correct ATM no");
+			return;
+		}
 		printf("\n");
 		printf("\t\t\tEnter pin        :");
 		char *c = getpass("");
+		if(strlen(c) < 3) {
+			printf("Enter Correct PIN no");
+			return;
+		}
 		printf("\n\n");
 		printf("\t\t\tPaid successfulyy");
 	}
@@ -53,7 +61,6 @@ int main(int argc, char *argv[]) {
 	close(mysocket);
 	return EXIT_SUCCESS;
 }
-
 char displayInfo(allinfo a) {
 	char y;
 	time_t now;
@@ -75,3 +82,4 @@ char displayInfo(allinfo a) {
 	scanf(" %c", &y);
 	return y;
 }
+

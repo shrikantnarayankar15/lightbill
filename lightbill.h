@@ -14,3 +14,7 @@ void generate_bill(int id, int unit);
 lightbill find_bill(int id);
 void pay_bill(int id);
 void show_bill();
+void display_lightbill(lightbill a);
+void show_bill_paid();
+void show_bill_not_paid();
+

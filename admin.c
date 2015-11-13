@@ -102,7 +102,7 @@ void printmenu2() {
 			scanf("%d", &id);
 			l = find_bill(id);
 			if(l.id) {
-				printf("%d", l.id);
+				display_lightbill(l);
 			}
 			else {
 				printf("not present");
