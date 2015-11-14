@@ -63,8 +63,20 @@ int main(int argc, char *argv[]) {
 }
 char displayInfo(allinfo a) {
 	char y;
+	if(a.b.paid_y_n == 'y') {
+		printf("\t\t\tAlready Paid");
+		getpass("");
+		exit(0);
+	}
 	time_t now;
 	time(&now);
+	time_t t = time(NULL);
+	struct tm *ts = localtime(&t);
+	char date[20];
+	strftime(date, 20, "%Y:%m:%d", ts);
+	if(strcmp(a.b.end_date, date) < 0) {
+		a.b.curr_bill = a.b.curr_bill + 10.0;
+	}		
 	printf("Date:  %s", ctime(&now));
 	printf("\n\n");
 	printf("\t\t----------------------------------------------------\n");

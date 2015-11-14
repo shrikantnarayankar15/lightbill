@@ -1,7 +1,7 @@
 typedef struct user {	
 	char id[10];
 	char name[30];
-	char addr[400];
+	char addr[50];
 	char phone_no[11];
 	char age[3];
 	char email[30];

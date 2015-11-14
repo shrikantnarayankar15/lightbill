@@ -73,7 +73,9 @@ void printmenu2() {
 	printf("\t\t\t1. Generate bill\n\n\n");
 	printf("\t\t\t2. Show all Bill\n\n\n");
 	printf("\t\t\t3. Find a Bill\n\n\n");
-	printf("\t\t\t4. Exit\n");
+	printf("\t\t\t4. Show Bill Paid\n\n\n");
+	printf("\t\t\t5. Show Bill Not Paid\n\n\n");
+	printf("\t\t\t6. Exit\n");
 	printf("\t\t\t-------------------------------------\n");
 	int ch;
 	printf("\n\n");
@@ -109,6 +111,14 @@ void printmenu2() {
 			}
 			break;
 		case 4:
+			system("clear");
+			show_bill_paid();
+			break;
+		case 5:
+			system("clear");
+			show_bill_not_paid();
+			break;
+		case 6:
 			return;		
 	}
 }	

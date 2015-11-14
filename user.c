@@ -11,19 +11,20 @@ void adduser() {
 	user obj;
 	fflush(stdin);
 	printf("\n\n");
-	printf("\t\t\tEnter ID: ");
+	printf("\t\t-------Enter the User Details-------\n\n");
+	printf("\t\t\tEnter ID:\t");
 	scanf("%s", obj.id);	
 	fflush(stdin);
-	printf("\t\t\tEnter Name: ");
+	printf("\t\t\tEnter Name: \t");
 	scanf("%s", obj.name);
-	printf("\t\t\tEnter Age: ");
+	printf("\t\t\tEnter Age: \t");
 	scanf("%s", obj.age);
-	printf("\t\t\tEnter phone_no:");
+	printf("\t\t\tEnter phone_no:\t");
 	scanf("%s", obj.phone_no);
 	fflush(stdin);
-	printf("\t\t\tAddress:");
+	printf("\t\t\tAddress:\t");
 	scanf("%s", obj.addr);
-	printf("\t\t\tEmail address:");
+	printf("\t\t\tEmail address:\t");
 	scanf("%s", obj.email);
 	printf("\n");
 	if(verifyid(atoi(obj.id)) == 0) {
@@ -53,11 +54,13 @@ user finduser(int id) {
 void remove_user(int id) {
 	FILE *fp, *ft;
 	user list;
+	user temp;
 	fp = fopen("userdata.txt", "r");
 	ft = fopen("temp1.txt", "w");
 	delete_bill(id);
 io:	while(fread(&list, sizeof(list), 1, fp) == 1) {
 		if(id == atoi(list.id)) {
+			temp = list;
 			delete_bill(id);
 			goto io;
 		}
@@ -65,6 +68,8 @@ io:	while(fread(&list, sizeof(list), 1, fp) == 1) {
 	}
 	fclose(fp);
 	fclose(ft);
+	printf("\t\t\t\nThe Following user has Been Deleted\n");
+	display_user(temp);
 	remove("userdata.txt");
 	rename("temp1.txt","userdata.txt");
 }
