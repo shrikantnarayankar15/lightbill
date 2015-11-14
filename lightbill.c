@@ -63,7 +63,7 @@ void generate_bill(int id, int unit) {
 		printf("Invalid unit");
 		return;
 	}
-	if(unit >= 100)
+	if(unit <= 100)
 		rate_per_unit = 3.76;
 	if(101 <= unit >= 300)
 		rate_per_unit = 7.21;
