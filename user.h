@@ -22,6 +22,11 @@ typedef struct user {
 	char age[3];
 	char email[30];
 }user;
+
+
+
+
+
 void adduser();
 void remove_user(int id);
 int verifyid(int id);

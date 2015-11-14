@@ -25,6 +25,12 @@ typedef struct lightbill {
 	char end_date[20];
 	char paid_y_n;
 }lightbill;
+
+
+
+
+
+
 void delete_bill(int id);
 void init_bill(int id);
 void generate_bill(int id, int unit);
